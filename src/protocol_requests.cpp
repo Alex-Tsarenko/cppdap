@@ -120,6 +120,10 @@ DAP_IMPLEMENT_STRUCT_TYPEINFO(
 
 DAP_IMPLEMENT_STRUCT_TYPEINFO(LaunchRequest,
                               "launch",
+                              DAP_FIELD(name, "name"),
+                              DAP_FIELD(type, "type"),
+                              DAP_FIELD(program, "program"),
+                              DAP_FIELD(stopOnEntry, "stopOnEntry"),
                               DAP_FIELD(restart, "__restart"),
                               DAP_FIELD(noDebug, "noDebug"));
 

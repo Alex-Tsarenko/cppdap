@@ -21,6 +21,7 @@
 #include "json_serializer.h"
 #include "socket.h"
 
+#include <iostream>
 #include <stdarg.h>
 #include <stdio.h>
 #include <atomic>
@@ -58,6 +59,8 @@ class Impl : public dap::Session {
 
   std::function<void()> getPayload() override {
     auto request = reader.read();
+std::cout << "\n<<<<\n";
+std::cout << request << "\n";
     if (request.size() > 0) {
       if (auto payload = processMessage(request)) {
         return payload;
@@ -474,6 +477,8 @@ class Impl : public dap::Session {
   }
 
   bool send(const std::string& s) {
+      std::cout << ">>>>\n";
+      std::cout << s << "\n";
     std::unique_lock<std::mutex> lock(sendMutex);
     if (!writer.isOpen()) {
       handlers.error("Send failed as the writer is closed");

@@ -1253,6 +1253,10 @@ DAP_DECLARE_STRUCT_TYPEINFO(LaunchResponse);
 // this specification.
 struct LaunchRequest : public Request {
   using Response = LaunchResponse;
+    string name;
+    string type;
+    string program;
+    optional<boolean> stopOnEntry;
   // Arbitrary data from the previous, restarted session.
   // The data is sent as the `restart` attribute of the `terminated` event.
   // The client should leave the data intact.
