@@ -1805,11 +1805,10 @@ DAP_DECLARE_STRUCT_TYPEINFO(ScopesRequest);
 // This includes the actual code location and whether the breakpoint could be
 // verified. The breakpoints returned are in the same order as the elements of
 // the `breakpoints` (or the deprecated `lines`) array in the arguments.
-struct SetBreakpointsResponse : public Response {
-  // Information about the breakpoints.
-  // The array elements are in the same order as the elements of the
-  // `breakpoints` (or the deprecated `lines`) array in the arguments.
-  array<Breakpoint> breakpoints;
+
+struct SetBreakpointsResponse : public Response
+{
+    array<Breakpoint>   breakpoints;
 };
 
 DAP_DECLARE_STRUCT_TYPEINFO(SetBreakpointsResponse);

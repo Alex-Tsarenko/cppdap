@@ -337,22 +337,23 @@ class Session {
 };
 
 template <typename F, typename RequestType>
-Session::IsRequestHandlerWithoutCallback<F> Session::registerHandler(
-    F&& handler) {
-  using ResponseType = typename RequestType::Response;
-  const TypeInfo* typeinfo = TypeOf<RequestType>::type();
-  registerHandler(typeinfo,
-                  [handler](const void* args,
-                            const RequestHandlerSuccessCallback& onSuccess,
-                            const RequestHandlerErrorCallback& onError) {
-                    ResponseOrError<ResponseType> res =
-                        handler(*reinterpret_cast<const RequestType*>(args));
-                    if (res.error) {
-                      onError(TypeOf<ResponseType>::type(), res.error);
-                    } else {
-                      onSuccess(TypeOf<ResponseType>::type(), &res.response);
-                    }
-                  });
+Session::IsRequestHandlerWithoutCallback<F> Session::registerHandler( F&& handler )
+{
+    using ResponseType = typename RequestType::Response;
+    const TypeInfo* typeinfo = TypeOf<RequestType>::type();
+
+    registerHandler( typeinfo, [handler]( const void* args,
+                                          const RequestHandlerSuccessCallback& onSuccess,
+                                          const RequestHandlerErrorCallback& onError)
+    {
+        ResponseOrError<ResponseType> res =
+            handler(*reinterpret_cast<const RequestType*>(args));
+
+        if ( res.error )
+          onError(TypeOf<ResponseType>::type(), res.error);
+        else
+          onSuccess(TypeOf<ResponseType>::type(), &res.response);
+    });
 }
 
 template <typename F, typename RequestType, typename ResponseType>
