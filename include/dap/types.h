@@ -66,7 +66,7 @@ class integer {
     return copy;
   }
 
- private:
+// private:
   int64_t val;
 };
 
