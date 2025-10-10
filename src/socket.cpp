@@ -208,11 +208,6 @@ class dap::Socket::Shared : public dap::ReaderWriter {
     }
     auto len = recv( s, buffer, int(bytes), 0 );
 
-    if ( len <= 0 )
-    {
-        close();
-    }
-
     return (len < 0) ? 0 : len;
   }
 
