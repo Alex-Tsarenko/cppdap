@@ -59,8 +59,11 @@ class Impl : public dap::Session {
 
   std::function<void()> getPayload() override {
     auto request = reader.read();
-std::cout << "\n<<<<\n";
-std::cout << request << "\n";
+    if ( request.size() > 0 )
+    {
+        std::cout << "\n<<<< " << request.size() << "\n";
+        std::cout << request << "\n";
+    }
     if (request.size() > 0) {
       if (auto payload = processMessage(request)) {
         return payload;
